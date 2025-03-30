@@ -1,3 +1,4 @@
+import { signIn, signOut } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -6,22 +7,17 @@ const useSignIn = () => {
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    const action = {
-      type: "SIGN_IN",
-      payload: {
-        id: 1,
-        userName: "John Doe",
-      },
+    // call api to sign in
+    const apiResponse = {
+      id: 1,
+      userName: "John Doe",
     };
-    dispatch(action);
+    dispatch(signIn(apiResponse));
     navigate("/");
   };
 
   const handleSignOut = () => {
-    const action = {
-      type: "SIGN_OUT",
-    };
-    dispatch(action);
+    dispatch(signOut());
     navigate("/sign-in");
   };
 

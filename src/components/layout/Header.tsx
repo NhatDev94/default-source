@@ -1,9 +1,14 @@
 import useSignIn from "@/pages/sign-in/hooks/useSignIn";
+import { RootState } from "@/redux";
+import { User } from "@/types/user";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const { handleSignOut } = useSignIn();
+
+  const user: User = useSelector((state: RootState) => state.user);
 
   const navigates = [
     {
@@ -27,6 +32,9 @@ const Header = () => {
         onClick={() => handleClick("/")}
       >
         Logo
+        <div className="">
+          {user.id} - {user.userName}
+        </div>
       </div>
 
       <div className="flex items-center">
