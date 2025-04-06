@@ -1,23 +1,20 @@
-import { signIn, signOut } from "@/redux/slices/userSlice";
+import { AppDispatch } from "@/redux";
+import { signIn } from "@/redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const useSignIn = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSignIn = () => {
+  const handleSignIn = async (userName: string, password: string) => {
     // call api to sign in
-    const apiResponse = {
-      id: 1,
-      userName: "John Doe",
-    };
-    dispatch(signIn(apiResponse));
+    await dispatch(signIn({ userName, password }));
     navigate("/");
   };
 
   const handleSignOut = () => {
-    dispatch(signOut());
+    // dispatch(signOut());
     navigate("/sign-in");
   };
 

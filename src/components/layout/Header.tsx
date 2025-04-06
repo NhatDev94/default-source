@@ -1,6 +1,6 @@
 import useSignIn from "@/pages/sign-in/hooks/useSignIn";
 import { RootState } from "@/redux";
-import { User } from "@/types/user";
+import { User } from "@/types/auth";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,9 @@ const Header = () => {
   const navigate = useNavigate();
   const { handleSignOut } = useSignIn();
 
-  const user: User = useSelector((state: RootState) => state.user);
+  const user: User = useSelector((state: RootState) => state.auth.user as User);
+  const token = useSelector((state: RootState) => state.auth.token);
+  console.log(user, token);
 
   const navigates = [
     {
@@ -33,7 +35,7 @@ const Header = () => {
       >
         Logo
         <div className="">
-          {user.id} - {user.userName}
+          {user?.userName} - {token}
         </div>
       </div>
 
